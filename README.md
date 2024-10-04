@@ -1,6 +1,6 @@
 # MTD
 
-**Website Stress Testing Tool** is a Python-based tool designed to simulate multiple HTTP requests to a website, primarily for testing server performance under heavy load. **This tool should only be used for ethical purposes, with permission from the website owner.**
+**MTD** is a Python-based tool designed to simulate multiple HTTP requests to a website, primarily for testing server performance under heavy load. **This tool should only be used for ethical purposes, with permission from the website owner.**
 
 ## Features
 
@@ -25,7 +25,7 @@ This tool should **only** be used on websites for which you have explicit permis
 2. **Navigate to the project directory:**
 
    ```bash
-   cd stress-testing-tool
+   cd mtd
    ```
 
 3. **Install the required dependencies:**
@@ -41,7 +41,7 @@ This tool should **only** be used on websites for which you have explicit permis
    To start the stress test, simply run the script:
    
    ```bash
-   python stress_test.py
+   python mtd.py
    ```
 
 2. **Input parameters:**
