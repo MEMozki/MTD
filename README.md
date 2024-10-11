@@ -28,12 +28,6 @@ This tool should **only** be used on websites for which you have explicit permis
    cd mtd
    ```
 
-3. **Install the required dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
 ## Usage
 
 1. **Run the tool:**
@@ -41,7 +35,7 @@ This tool should **only** be used on websites for which you have explicit permis
    To start the stress test, simply run the script:
    
    ```bash
-   python mtd.py
+   java mtd.py
    ```
 
 2. **Input parameters:**
@@ -63,18 +57,6 @@ This tool should **only** be used on websites for which you have explicit permis
    ```
 
    The script will then start sending requests and display the response information in real time.
-
-## Dependencies
-
-- `requests`: Handles the HTTP requests.
-- `threading`: Provides multi-threading capabilities for simultaneous requests.
-- `colorama`: Adds color to the command-line interface for better readability.
-
-You can install the dependencies by running:
-
-```bash
-pip install requests colorama
-```
 
 ## Legal & Ethical Use
 
