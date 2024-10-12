@@ -1,75 +1,65 @@
-```markdown
-# MTD - DoS Attack Script (Version 3.0)
+# MTD (Multi-Threaded DoS Attack Tool)
 
-## Overview
+## Description
 
-This project is a basic **Denial of Service (DoS)** attack simulation script written in **Java**. It performs a high volume of HTTP POST requests to a given target host using either direct connections or through random proxies.
-
-> **Disclaimer**: This tool is for educational purposes only. Performing unauthorized attacks on networks or servers is illegal and unethical. Always ensure you have permission from the server owner before testing.
+MTD is a simple multi-threaded DoS (Denial of Service) attack tool written in Java. It allows users to send multiple HTTP POST requests to specified domains, optionally utilizing a list of proxy servers to anonymize the requests. The tool is primarily intended for educational purposes, to demonstrate the concept of DoS attacks and the importance of network security.
 
 ## Features
 
-- **Multiple Hosts**: Attack multiple hosts simultaneously by specifying them in a comma-separated list.
-- **Custom Data Size**: Specify the size of the data payload in each request.
-- **Request Quantity**: Define the number of requests per host.
-- **Request Rate**: Control the rate of requests per second.
-- **Proxy Support**: Optionally route requests through a predefined list of proxies to obfuscate origin.
-- **Reachability Check**: Validates if hosts are reachable before launching the attack.
-- **Threading**: Utilizes multithreading (via Java's `ExecutorService`) to send requests in parallel.
+- **Multi-Threaded**: Sends multiple requests concurrently to improve attack efficiency.
+- **Proxy Support**: Option to route requests through proxy servers for anonymity.
+- **Domain Check**: Validates the availability of target domains before starting the attack.
+- **Customizable Request Parameters**: Allows users to define data size, quantity of requests, and delay between requests.
+- **Real-Time Feedback**: Provides real-time updates on request statuses and response times.
 
-## Requirements
+## Prerequisites
 
-- **Java 8 or later**
+- Java Development Kit (JDK) 8 or higher installed on your machine.
+- Basic understanding of networking concepts.
 
-## Usage
+## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/MEMozki/MTD.git
+   cd MTD/3.0
    ```
 
-2. Compile the Java program:
+2. Compile the Java file:
+
    ```bash
    javac mtd.java
    ```
 
-3. Run the compiled program:
+## Usage
+
+1. Run the compiled Java program:
+
    ```bash
    java DoSAttack
    ```
 
-### Parameters during execution
+2. Follow the on-screen prompts to:
 
-1. **Hosts**: Enter a comma-separated list of hostnames to target.
-   - Example: `example.com, test.com`
-   
-2. **Data Size**: Enter the size of the data payload in bytes for each request.
-   - Example: `1024`
-   
-3. **Quantity**: Enter the number of requests per host.
-   - Example: `1000`
-   
-4. **Delay**: Enter the number of requests per second.
-   - Example: `10`
-   
-5. **Use Proxy**: Choose whether to route traffic through a proxy by typing `yes` or `no`.
+   - Enter the target domains (comma-separated).
+   - Specify the size of the data to be sent.
+   - Choose the quantity of requests.
+   - Set the delay between requests (in seconds).
+   - Decide whether to use proxy servers.
 
-## Proxy Support
+3. The program will validate the domains and start sending requests based on your input.
 
-The script includes a small list of HTTP proxies. The proxy list can be expanded by modifying the `proxies` array in the `DoSAttack` class. If proxy usage is enabled, a random proxy from the list will be selected for each request.
+## Important Notes
 
-## Example Output
-
-```bash
-(1) | example.com - 200 : 0.25 ms | 1024 : 512 BYTE | 10.10.1.10:3128 | 12:34:56.789
-(2) | test.com - 0 : fail | 0 : 0 BYTE | None | 12:34:56.999
-```
-
-## Contributing
-
-Feel free to contribute by opening issues or submitting pull requests to improve the functionality or add features.
+- This tool is intended for educational and research purposes only. Unauthorized use against servers or networks without permission is illegal and unethical.
+- Ensure you have explicit permission to test any network or system you target with this tool.
+- Use responsibly and understand the legal implications of network testing.
 
 ## License
 
-This project is licensed under the MIT License.
-```
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Disclaimer
+
+The author and contributors of this tool do not take any responsibility for misuse or damages caused by the use of this tool.
