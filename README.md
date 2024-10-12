@@ -1,6 +1,6 @@
 # MTD
 
-**MTD** is a Java-based tool designed to simulate multiple HTTP requests to a website, primarily for testing server performance under heavy load. **This tool should only be used for ethical purposes, with permission from the website owner.**
+**MTD** is a Python-based tool designed to simulate multiple HTTP requests to a website, primarily for testing server performance under heavy load. **This tool should only be used for ethical purposes, with permission from the website owner.**
 
 ## Features
 
